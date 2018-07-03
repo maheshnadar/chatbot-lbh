@@ -4431,47 +4431,47 @@ $scope.formData = { customer_name:$.jStorage.get("name"),customer_id:$.jStorage.
             });
         }
 
-        function startPrivateConversation() {
+        // function startPrivateConversation() {
 
-            // Get the user list
-            var select = $('#users-list');
+        //     // Get the user list
+        //     var select = $('#users-list');
 
-            // Make sure a user is selected in the list
-            if (select.val() === null) {
-                return alert('Please select a user to send a private message to.');
-            }
+        //     // Make sure a user is selected in the list
+        //     if (select.val() === null) {
+        //         return alert('Please select a user to send a private message to.');
+        //     }
 
-            // Get the recipient's name from the text of the option in the <select>
-            var recipientName = $('option:selected', select).text();
-            var recipientId = select.val();
+        //     // Get the recipient's name from the text of the option in the <select>
+        //     var recipientName = $('option:selected', select).text();
+        //     var recipientId = select.val();
 
-            // Prompt for a message to send
-            var message = prompt("Enter a message to send to " + recipientName);
+        //     // Prompt for a message to send
+        //     var message = prompt("Enter a message to send to " + recipientName);
 
-            // Create the UI for the room if it doesn't exist
-            createPrivateConversationRoom({
-                name: recipientName,
-                id: recipientId
-            });
+        //     // Create the UI for the room if it doesn't exist
+        //     createPrivateConversationRoom({
+        //         name: recipientName,
+        //         id: recipientId
+        //     });
 
-            // Add the message to the room
-            addMessageToConversation($rootScope.agentsessionid, recipientId, message);
+        //     // Add the message to the room
+        //     addMessageToConversation($rootScope.agentsessionid, recipientId, message);
 
-            // Send the private message
-            io.socket.post('/chat/private', {
-                to: recipientId,
-                msg: message,
-                fromid: $rootScope.agentsessionid,
-                fromname: $scope.afname,
-                fromaccess: "livechat",
-                from_socketid: $scope.asocketId,
-                fromemail: $scope.agentemail,
+        //     // Send the private message
+        //     io.socket.post('/chat/private', {
+        //         to: recipientId,
+        //         msg: message,
+        //         fromid: $rootScope.agentsessionid,
+        //         fromname: $scope.afname,
+        //         fromaccess: "livechat",
+        //         from_socketid: $scope.asocketId,
+        //         fromemail: $scope.agentemail,
 
 
-                //to_socketid: newuser[arr_ind].socketId,
-            });
+        //         //to_socketid: newuser[arr_ind].socketId,
+        //     });
 
-        }
+        // }
 
         // $scope.$on('$locationChangeStart', function (event, next, current) {
         //     if (check(next+current)) {
@@ -4482,79 +4482,79 @@ $scope.formData = { customer_name:$.jStorage.get("name"),customer_id:$.jStorage.
         //     }    
         // });
         // Create the HTML to hold a private conversation between two users
-        function createPrivateConversationRoom(penPal) {
+        // function createPrivateConversationRoom(penPal) {
 
-            // Get the ID of the HTML element for this private convo, if there is one
-            var roomName = 'private-room-' + penPal.id;
-            //console.log(penPal);
-            // If HTML for the room already exists, return.
-            if ($('#' + roomName).length) {
-                $('#private-message-' + penPal.id).show();
-                $('#private-button-' + penPal.id).show();
-                return;
-            }
+        //     // Get the ID of the HTML element for this private convo, if there is one
+        //     var roomName = 'private-room-' + penPal.id;
+        //     //console.log(penPal);
+        //     // If HTML for the room already exists, return.
+        //     if ($('#' + roomName).length) {
+        //         $('#private-message-' + penPal.id).show();
+        //         $('#private-button-' + penPal.id).show();
+        //         return;
+        //     }
 
-            var penPalName = penPal.sname == "unknown" ? ("User #" + penPal.id) : penPal.sname;
+        //     var penPalName = penPal.sname == "unknown" ? ("User #" + penPal.id) : penPal.sname;
 
-            // Create a new div to contain the room
-            var roomDiv = $('<div id="' + roomName + '"></div>');
-
-
-
-            // Create the HTML for the room
-            //            var roomHTML = '<div class="userlist"><button class="blink-bg blink_me" data-toggle="collapse" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"></button><button type="button" class="btn useronline "  > <span  id="private-username-' + penPal.id + '"><span class="userimg"><img src="img/logo7.png" class="img-fluid"></span>' + penPalName + '</span><span class="pull-right onlinesymbol"><i class="fa fa-circle" aria-hidden="true"></i></span></button></div>';
-            //            var chatconv = '<div class="collapse in" id="collapseExample' + roomName + '"><div id="private-messages-' + penPal.id + '" style="height:' + $scope.agentchatpanelheight + 'px;" class="private_conv"></div>' +
-            //                '<div class="row"><div class="col-md-9"><input id="private-message-' + penPal.id + '" placeholder="Enter Message"  class="form-control pvtmsg"/></div><div class="col-md-3"> <button class="btn btn-primary agentsendbtn" id="private-button-' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '"><i class="fa fa-paper-plane" aria-hidden="true"></i></button"></div></div></div>';
-            //            roomDiv.html(roomHTML);
-
-            // var roomHTML = '<div class="userlist"><button class="blink-bg blink_me blinkbtn' + penPal.id + '" data-toggle="tab" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"><i class="fa fa-times" aria-hidden="true"></i></button><button type="button" class="btn useronline show-blink " data-toggle="tab" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"> <span class="user-right" id="private-username-' + penPal.id + '"><span class="userimg"><img src="img/logo7.png" class="img-fluid"></span>' + penPalName + '</span><span class="pull-right onlinesymbol"><i class="fa fa-circle" aria-hidden="true"></i></span><i class="fa fa-times closechat" aria-hidden="true" id="private-username-' + penPal.id + '" ></i></button></div>';
-            var roomHTML = '<div class="userlist"><button class="blink-bg blink_me blinkbtn' + penPal.id + '" data-toggle="tab" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"></button><button type="button" class="btn useronline show-blink" data-toggle="tab" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"> <span class="user-right closechat" id="private-username-' + penPal.id + '"><span class="userimg"><img src="img/logo7.png" class="img-fluid"></span>' + penPalName + '</span><span class="pull-right onlinesymbol addgreen' + penPal.id + '" data-toggle="tab" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"><i class="fa fa-circle" aria-hidden="true"></i></span><i class="fa fa-times closechatt" aria-hidden="true" id="chatclose" id="private-username-' + penPal.id + '"  id="collapseExample' + roomName + '" ></i></button></div>';
-            // var chatconv = '<div class="tab-pane fade " id="collapseExample' + roomName + '"><div id="private-messages-' + penPal.id + '" style="height:' + $scope.agentchatpanelheight + 'px;"  class="private_conv"></div>' +
-            // '<div class="row"><div class="col-md-9"><input id="private-message-' + penPal.id + '" placeholder="Enter Message"  class="form-control bor-gray pvtmsg"/></div><div class="col-md-1"> <button class="btn btn-primary agentsendbtn" id="private-button-' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '"><i class="fa fa-paper-plane" aria-hidden="true"></i></button"></div> <div class="col-md-2"><div class="agent-list" ng-if="liveuserlist"> <select><option disabled selected>Transfer chat</option> <option  data-ng-repeat="liveuser in liveuserlist">{{liveuser.name}}</option> </select> </div> </div></div></div>'; roomDiv.html(roomHTML);
-            // var chatconv = '<div class="tab-pane fade " id="collapseExample' + roomName + '"><div id="private-messages-' + penPal.id + '" style="height:' + $scope.agentchatpanelheight + 'px;"  class="private_conv"></div>' +
-            //     '<div class="row"><div class="col-md-9"><input id="private-message-' + penPal.id + '" placeholder="Enter Message"  class="form-control bor-gray pvtmsg"/></div><div class="col-md-1"> <button class="btn btn-primary agentsendbtn " id="private-button-' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '"><i class="fa fa-paper-plane" aria-hidden="true"></i></button"></div><div class="col-md-2"><button type="button" class="btn btn-primary btn-md transferchat" data-id="' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '">Transfer chat</button></div></div></div>'; roomDiv.html(roomHTML);
-            var chatconv = '<div class="tab-pane fade " id="collapseExample' + roomName + '"><div id="private-messages-' + penPal.id + '" style="height:' + $scope.agentchatpanelheight + 'px;"  class="private_conv"></div>' +
-                '<div class="row"><div class="col-md-9"><input id="private-message-' + penPal.id + '" placeholder="Enter Message"  class="form-control bor-gray pvtmsg"/></div><div class="col-md-1"> <button class="btn btn-primary agentsendbtn " id="private-button-' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '"><i class="fa fa-paper-plane" aria-hidden="true"></i></button"></div><div class="col-md-2"><button type="button" class="btn btn-primary btn-md enduserchat" id="endchat" data-id="' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '">End chat</button> </div></div></div>';
-            roomDiv.html(roomHTML);
-
-            // Add the room to the private conversation area
-            $('#convos .agentusersidebar').append(roomDiv);
-            $("#convos_chat").append(chatconv);
-            // Hook up the "send message" button
-            $('#private-button-' + penPal.id).click(onClickSendPrivateMessage);
+        //     // Create a new div to contain the room
+        //     var roomDiv = $('<div id="' + roomName + '"></div>');
 
 
-            window.onbeforeunload = function () {
-                return "Data will be lost if you leave the page, are you sure?";
 
-            };
+        //     // Create the HTML for the room
+        //     //            var roomHTML = '<div class="userlist"><button class="blink-bg blink_me" data-toggle="collapse" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"></button><button type="button" class="btn useronline "  > <span  id="private-username-' + penPal.id + '"><span class="userimg"><img src="img/logo7.png" class="img-fluid"></span>' + penPalName + '</span><span class="pull-right onlinesymbol"><i class="fa fa-circle" aria-hidden="true"></i></span></button></div>';
+        //     //            var chatconv = '<div class="collapse in" id="collapseExample' + roomName + '"><div id="private-messages-' + penPal.id + '" style="height:' + $scope.agentchatpanelheight + 'px;" class="private_conv"></div>' +
+        //     //                '<div class="row"><div class="col-md-9"><input id="private-message-' + penPal.id + '" placeholder="Enter Message"  class="form-control pvtmsg"/></div><div class="col-md-3"> <button class="btn btn-primary agentsendbtn" id="private-button-' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '"><i class="fa fa-paper-plane" aria-hidden="true"></i></button"></div></div></div>';
+        //     //            roomDiv.html(roomHTML);
 
-            //   $(document).on('click', '.closechat', function () {
-            //     console.log("%%%%%%%%%hihihihi")
+        //     // var roomHTML = '<div class="userlist"><button class="blink-bg blink_me blinkbtn' + penPal.id + '" data-toggle="tab" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"><i class="fa fa-times" aria-hidden="true"></i></button><button type="button" class="btn useronline show-blink " data-toggle="tab" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"> <span class="user-right" id="private-username-' + penPal.id + '"><span class="userimg"><img src="img/logo7.png" class="img-fluid"></span>' + penPalName + '</span><span class="pull-right onlinesymbol"><i class="fa fa-circle" aria-hidden="true"></i></span><i class="fa fa-times closechat" aria-hidden="true" id="private-username-' + penPal.id + '" ></i></button></div>';
+        //     var roomHTML = '<div class="userlist"><button class="blink-bg blink_me blinkbtn' + penPal.id + '" data-toggle="tab" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"></button><button type="button" class="btn useronline show-blink" data-toggle="tab" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"> <span class="user-right closechat" id="private-username-' + penPal.id + '"><span class="userimg"><img src="img/logo7.png" class="img-fluid"></span>' + penPalName + '</span><span class="pull-right onlinesymbol addgreen' + penPal.id + '" data-toggle="tab" data-target="#collapseExample' + roomName + '" aria-expanded="false" aria-controls="collapseExample' + roomName + '"><i class="fa fa-circle" aria-hidden="true"></i></span><i class="fa fa-times closechatt" aria-hidden="true" id="chatclose" id="private-username-' + penPal.id + '"  id="collapseExample' + roomName + '" ></i></button></div>';
+        //     // var chatconv = '<div class="tab-pane fade " id="collapseExample' + roomName + '"><div id="private-messages-' + penPal.id + '" style="height:' + $scope.agentchatpanelheight + 'px;"  class="private_conv"></div>' +
+        //     // '<div class="row"><div class="col-md-9"><input id="private-message-' + penPal.id + '" placeholder="Enter Message"  class="form-control bor-gray pvtmsg"/></div><div class="col-md-1"> <button class="btn btn-primary agentsendbtn" id="private-button-' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '"><i class="fa fa-paper-plane" aria-hidden="true"></i></button"></div> <div class="col-md-2"><div class="agent-list" ng-if="liveuserlist"> <select><option disabled selected>Transfer chat</option> <option  data-ng-repeat="liveuser in liveuserlist">{{liveuser.name}}</option> </select> </div> </div></div></div>'; roomDiv.html(roomHTML);
+        //     // var chatconv = '<div class="tab-pane fade " id="collapseExample' + roomName + '"><div id="private-messages-' + penPal.id + '" style="height:' + $scope.agentchatpanelheight + 'px;"  class="private_conv"></div>' +
+        //     //     '<div class="row"><div class="col-md-9"><input id="private-message-' + penPal.id + '" placeholder="Enter Message"  class="form-control bor-gray pvtmsg"/></div><div class="col-md-1"> <button class="btn btn-primary agentsendbtn " id="private-button-' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '"><i class="fa fa-paper-plane" aria-hidden="true"></i></button"></div><div class="col-md-2"><button type="button" class="btn btn-primary btn-md transferchat" data-id="' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '">Transfer chat</button></div></div></div>'; roomDiv.html(roomHTML);
+        //     var chatconv = '<div class="tab-pane fade " id="collapseExample' + roomName + '"><div id="private-messages-' + penPal.id + '" style="height:' + $scope.agentchatpanelheight + 'px;"  class="private_conv"></div>' +
+        //         '<div class="row"><div class="col-md-9"><input id="private-message-' + penPal.id + '" placeholder="Enter Message"  class="form-control bor-gray pvtmsg"/></div><div class="col-md-1"> <button class="btn btn-primary agentsendbtn " id="private-button-' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '"><i class="fa fa-paper-plane" aria-hidden="true"></i></button"></div><div class="col-md-2"><button type="button" class="btn btn-primary btn-md enduserchat" id="endchat" data-id="' + penPal.id + '" data-sname="' + penPal.sname + '" data_id="' + penPal.fromemail + '" data-socketid="' + penPal.from_socketid + '">End chat</button> </div></div></div>';
+        //     roomDiv.html(roomHTML);
 
-            //     removeUser(message.data.from.id);
-            //    });
+        //     // Add the room to the private conversation area
+        //     $('#convos .agentusersidebar').append(roomDiv);
+        //     $("#convos_chat").append(chatconv);
+        //     // Hook up the "send message" button
+        //     $('#private-button-' + penPal.id).click(onClickSendPrivateMessage);
 
-            //   $("#endchat").on('click', function(){
-            //     $("#collapseExample").remove();
-            //    });
 
-            //get live agent list
+        //     window.onbeforeunload = function () {
+        //         return "Data will be lost if you leave the page, are you sure?";
 
-            apiService.getliveuser().then(function (data) {
-                $scope.liveuserlist = data.data.data;
+        //     };
 
-                var evens = _.remove($scope.liveuserlist, function (n) {
-                    return n.email == $scope.agentemail || n.email == null;
-                });
+        //     //   $(document).on('click', '.closechat', function () {
+        //     //     console.log("%%%%%%%%%hihihihi")
 
-                angular.forEach($scope.liveuserlist, function (value) {
+        //     //     removeUser(message.data.from.id);
+        //     //    });
 
-                });
+        //     //   $("#endchat").on('click', function(){
+        //     //     $("#collapseExample").remove();
+        //     //    });
 
-            });
+        //     //get live agent list
 
-        }
+        //     apiService.getliveuser().then(function (data) {
+        //         $scope.liveuserlist = data.data.data;
+
+        //         var evens = _.remove($scope.liveuserlist, function (n) {
+        //             return n.email == $scope.agentemail || n.email == null;
+        //         });
+
+        //         angular.forEach($scope.liveuserlist, function (value) {
+
+        //         });
+
+        //     });
+
+        // }
 
 
         //transfer user chat
@@ -4730,55 +4730,55 @@ $scope.formData = { customer_name:$.jStorage.get("name"),customer_id:$.jStorage.
 
 
         // Callback for when the user clicks the "Send message" button in a private conversation
-        function onClickSendPrivateMessage(e) {
+        // function onClickSendPrivateMessage(e) {
 
-            // Get the button that was pressed
-            var button = e.currentTarget;
+        //     // Get the button that was pressed
+        //     var button = e.currentTarget;
 
-            // Get the ID of the user we want to send to
-            var recipientId = parseInt(button.id.split('-')[2]);
-            var from_socketid = $(this).attr("data-socketid");
-            var from_id = $(this).attr("data_id");
-            var from_sname = $(this).attr("data-sname");
-            // Get the message to send
-            var message = $('#private-message-' + recipientId).val();
-            // console.log(message);
-            // console.log(recipientId);
-            // console.log(message);
-            // console.log(message);
-            $('#private-message-' + recipientId).val("");
-            if (message != '') {
-                // Add this message to the room
-                addMessageToConversation(window.me.id, recipientId, message);
+        //     // Get the ID of the user we want to send to
+        //     var recipientId = parseInt(button.id.split('-')[2]);
+        //     var from_socketid = $(this).attr("data-socketid");
+        //     var from_id = $(this).attr("data_id");
+        //     var from_sname = $(this).attr("data-sname");
+        //     // Get the message to send
+        //     var message = $('#private-message-' + recipientId).val();
+        //     // console.log(message);
+        //     // console.log(recipientId);
+        //     // console.log(message);
+        //     // console.log(message);
+        //     $('#private-message-' + recipientId).val("");
+        //     if (message != '') {
+        //         // Add this message to the room
+        //         addMessageToConversation(window.me.id, recipientId, message);
 
-                // Send the message
-                io.socket.post('/chat/private', {
-                    to: recipientId,
-                    msg: message,
-                    fromaccess: "",
-                    from_socketid: $scope.asocketId,
-                    fromemail: $scope.agentemail,
-                    fromid: $rootScope.agentsessionid,
-                    fromname: $scope.agentname,
+        //         // Send the message
+        //         io.socket.post('/chat/private', {
+        //             to: recipientId,
+        //             msg: message,
+        //             fromaccess: "",
+        //             from_socketid: $scope.asocketId,
+        //             fromemail: $scope.agentemail,
+        //             fromid: $rootScope.agentsessionid,
+        //             fromname: $scope.agentname,
 
-                });
-                var formData = {
-                    msg: message,
-                    from_id: $scope.agentemail,
-                    fromid: $rootScope.agentsessionid,
-                    fromname: $scope.agentname,
-                    from_socketid: $scope.asocketId,
-                    toid: recipientId,
-                    toname: from_sname,
-                    to_id: from_id,
-                    to_socketid: from_socketid
-                };
-                apiService.saveagentchat(formData).then(function (data) {
+        //         });
+        //         var formData = {
+        //             msg: message,
+        //             from_id: $scope.agentemail,
+        //             fromid: $rootScope.agentsessionid,
+        //             fromname: $scope.agentname,
+        //             from_socketid: $scope.asocketId,
+        //             toid: recipientId,
+        //             toname: from_sname,
+        //             to_id: from_id,
+        //             to_socketid: from_socketid
+        //         };
+        //         apiService.saveagentchat(formData).then(function (data) {
 
-                });
-                $scope.scrollagentChatWindow(recipientId);
-            }
-        }
+        //         });
+        //         $scope.scrollagentChatWindow(recipientId);
+        //     }
+        // }
 
         function viewtransferchat(senderId, recipientId, message, sender) {
 
@@ -4948,33 +4948,33 @@ $scope.formData = { customer_name:$.jStorage.get("name"),customer_id:$.jStorage.
             }
         }
         // Add HTML for a new message in a private conversation
-        function addMessageToConversation(senderId, recipientId, message, sender) {
-            // console.log("*************************8", sender);
-            var fromMe = senderId == $rootScope.agentsessionid;
-            var roomName = 'private-messages-' + (fromMe ? recipientId : senderId);
-            var senderName = fromMe ? "Me" : $('#private-username-' + senderId).html();
-            // console.log(message);
-            // console.log(senderId);
-            if (typeof (message) == 'string') {
-                var justify = fromMe ? 'right' : 'left';
-                var alignclass = fromMe ? 'pull-right' : 'pull-left';
-                var bubbleclass = fromMe ? 'rightbubble' : 'leftbubble';
-                var floatclass = fromMe ? 'floatright' : 'floatleft';
-                var div = $('<div class="' + floatclass + '" ></div>');
-                div.html('<strong class="' + alignclass + '">' + senderName + '</strong> <div  class="' + bubbleclass + '">' + message + '</div>');
-                $('#' + roomName).append(div);
-                $('.blinkbtn' + senderId).show();
-                $('.addgreen' + senderId).show();
+        // function addMessageToConversation(senderId, recipientId, message, sender) {
+        //     // console.log("*************************8", sender);
+        //     var fromMe = senderId == $rootScope.agentsessionid;
+        //     var roomName = 'private-messages-' + (fromMe ? recipientId : senderId);
+        //     var senderName = fromMe ? "Me" : $('#private-username-' + senderId).html();
+        //     // console.log(message);
+        //     // console.log(senderId);
+        //     if (typeof (message) == 'string') {
+        //         var justify = fromMe ? 'right' : 'left';
+        //         var alignclass = fromMe ? 'pull-right' : 'pull-left';
+        //         var bubbleclass = fromMe ? 'rightbubble' : 'leftbubble';
+        //         var floatclass = fromMe ? 'floatright' : 'floatleft';
+        //         var div = $('<div class="' + floatclass + '" ></div>');
+        //         div.html('<strong class="' + alignclass + '">' + senderName + '</strong> <div  class="' + bubbleclass + '">' + message + '</div>');
+        //         $('#' + roomName).append(div);
+        //         $('.blinkbtn' + senderId).show();
+        //         $('.addgreen' + senderId).show();
 
-                $scope.scrollagentChatWindow(senderId);
+        //         $scope.scrollagentChatWindow(senderId);
 
-            } else {
-                // botconversation(senderId, recipientId, message, sender);
-                viewtransferchat(senderId, recipientId, message, sender);
-            }
-            $(".enduserchat[data-id=" + senderId + "]").show()
-            $("#private-room-" + senderId).removeClass("gtor");
-        }
+        //     } else {
+        //         // botconversation(senderId, recipientId, message, sender);
+        //         viewtransferchat(senderId, recipientId, message, sender);
+        //     }
+        //     $(".enduserchat[data-id=" + senderId + "]").show()
+        //     $("#private-room-" + senderId).removeClass("gtor");
+        // }
 
 
 
@@ -5004,50 +5004,50 @@ $scope.formData = { customer_name:$.jStorage.get("name"),customer_id:$.jStorage.
         }
 
         // Handle an incoming private message from the server.
-        function receivePrivateMessage(data) {
+        // function receivePrivateMessage(data) {
 
-            var sender = data.from;
+        //     var sender = data.from;
 
-            // Create a room for this message if one doesn't exist
-            createPrivateConversationRoom(sender);
-            //window blink
-            // console.log(sender);
-            var oldTitle = document.title;
-            var msg = "New Msg from " + sender.sname;
-            var timeoutId = false;
+        //     // Create a room for this message if one doesn't exist
+        //     createPrivateConversationRoom(sender);
+        //     //window blink
+        //     // console.log(sender);
+        //     var oldTitle = document.title;
+        //     var msg = "New Msg from " + sender.sname;
+        //     var timeoutId = false;
 
-            var blink = function () {
-                document.title = document.title == msg ? oldTitle : msg; //Modify Title in case a popup
+        //     var blink = function () {
+        //         document.title = document.title == msg ? oldTitle : msg; //Modify Title in case a popup
 
-                if (document.hasFocus()) //Stop blinking and restore the Application Title
-                {
-                    document.title = oldTitle;
-                    clearInterval(timeoutId);
-                }
-            };
-            notifyMe(msg);
-            if (!timeoutId) {
-                timeoutId = setInterval(blink, 500); //Initiate the Blink Call
-            }; //Blink logic
-            // Add a message to the room
-            addMessageToConversation(sender.id, $rootScope.agentsessionid, data.msg, sender);
-            //$(".chat").append("<li class='left clearfix'><span class='chat-img pull-left'><img ng-src='img/Tenali.png' alt='BOT' class='img-circle  doneLoading' src='img/Tenali.png'></span><div class='chat-body'><p>"+data.msg+" </p></div></li>");
-            //console.log(data, "recvdmsg");
-            mymsg = {
-                Text: data.msg,
-                type: "SYS_FIRST"
-            };
-            //$rootScope.chatlist.push({id:"id",msg:mymsg,position:"left",curTime: $rootScope.getDatetime()});
-            //$rootScope.pushSystemMsg(0,mymsg);  
-
-
-            $scope.coinAudio = new Audio('audio/sound.mp3');
-            $scope.coinAudio.pause();
-            $scope.coinAudio.play();
+        //         if (document.hasFocus()) //Stop blinking and restore the Application Title
+        //         {
+        //             document.title = oldTitle;
+        //             clearInterval(timeoutId);
+        //         }
+        //     };
+        //     notifyMe(msg);
+        //     if (!timeoutId) {
+        //         timeoutId = setInterval(blink, 500); //Initiate the Blink Call
+        //     }; //Blink logic
+        //     // Add a message to the room
+        //     addMessageToConversation(sender.id, $rootScope.agentsessionid, data.msg, sender);
+        //     //$(".chat").append("<li class='left clearfix'><span class='chat-img pull-left'><img ng-src='img/Tenali.png' alt='BOT' class='img-circle  doneLoading' src='img/Tenali.png'></span><div class='chat-body'><p>"+data.msg+" </p></div></li>");
+        //     //console.log(data, "recvdmsg");
+        //     mymsg = {
+        //         Text: data.msg,
+        //         type: "SYS_FIRST"
+        //     };
+        //     //$rootScope.chatlist.push({id:"id",msg:mymsg,position:"left",curTime: $rootScope.getDatetime()});
+        //     //$rootScope.pushSystemMsg(0,mymsg);  
 
 
+        //     $scope.coinAudio = new Audio('audio/sound.mp3');
+        //     $scope.coinAudio.pause();
+        //     $scope.coinAudio.play();
 
-        }
+
+
+        // }
         angular.element(document).ready(function () {
             //$('.pvtmsg').keypress(function (e) {
             // $('.pvtmsg').keyup(function(){

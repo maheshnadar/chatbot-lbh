@@ -89,11 +89,11 @@
 								</div>
 								<div class="row" ng-if="!ac.disconnected">
 									<div class="col-md-7">
-										<input id="private-message-{{$index}}" ng-model="inputs[ac.user1]" placeholder="Enter Message" class="form-control bor-gray pvtmsg"
+										<input id="private-message-{{$index}}" ng-model="inputs[ac.user1]" ng-enter="sendmsg(ac.user1,ac.username1,ac.user2,ac.username2,inputs[ac.user1])" placeholder="Enter Message" class="form-control bor-gray pvtmsg"
 										/>
 									</div>
 									<div class="col-md-1">
-										<button class="btn btn-primary agentsendbtn " ng-enter="sendmsg(ac.user1,ac.username1,ac.user2,ac.username2,inputs[ac.user1]);"
+										<button class="btn btn-primary agentsendbtn " 
 										    ng-click="sendmsg(ac.user1,ac.username1,ac.user2,ac.username2,inputs[ac.user1]);" id="private-button-{{$index}}">
 											<i class="fa fa-paper-plane" aria-hidden="true"></i>
 										</button>
