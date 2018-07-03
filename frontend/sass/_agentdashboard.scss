@@ -1,0 +1,24 @@
+.agentdashboard{
+.agentusersidebar{
+    // color:white;
+}
+.message-container{
+    .message-left,.message-right{
+        span{
+            // background: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            max-width: 20vw;
+            /* overflow: hidden; */
+            word-break: break-all;
+            display: inline-block;
+            margin: 0.5rem 0px;
+            float: unset;
+        }
+       
+    }
+    .message-right{
+        text-align: right;
+    }
+}
+}

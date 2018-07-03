@@ -1,4 +1,4 @@
-<div id="main">
+<div id="main" class="agentdashboard">
 	<div style="display:none;">
 		<div>
 			My name:
@@ -38,14 +38,16 @@
 								<b>CONNECTED USERS</b>
 							</h5>
 						</div>
+
 						<div class="userlist" ng-repeat="ac in allchats track by $index">
 
+							<div class="">{{ac.user1}}</div>
 							<button class="blink-bg blink_me blinkbtn{{ac.username1}}" data-toggle="tab" data-target="#collapseExample{{$index}}" aria-expanded="false"
-							  aria-controls="collapseExample{{$index}}">
+							    aria-controls="collapseExample{{$index}}">
 
 							</button>
 							<button type="button" class="btn useronline show-blink" data-toggle="tab" data-target="#collapseExample{{ac.user1}}" aria-expanded="false"
-							  aria-controls="collapseExample{{$index}}">
+							    aria-controls="collapseExample{{$index}}">
 								<span class="user-right closechat" id="private-username-{{ac.user1}}">
 									<span class="userimg">
 										<img src="img/logo7.png" class="img-fluid">
@@ -53,7 +55,7 @@
 									{{ac.username1}}
 								</span>
 								<span class="pull-right onlinesymbol addgreen{{ac.user1}}" data-toggle="tab" data-target="#collapseExample{{$index}}" aria-expanded="false"
-								  aria-controls="collapseExample{{$index}}">
+								    aria-controls="collapseExample{{$index}}">
 									<i class="fa fa-circle" aria-hidden="true"></i>
 								</span>
 								<i class="fa fa-times closechatt" aria-hidden="true" id="chatclose" id="private-username-{{$index}}" id="collapseExample-{{$index}}"></i>
@@ -76,23 +78,34 @@
 						<div class="" ng-repeat="ac in allchats track by $index">
 							<div class="tab-pane fade " id="collapseExample{{$index}}">
 								<div id="private-messages-{{$index}}" ng-style="{'height':agentchatpanelheight}" class="private_conv">
-
+									<div class="message-container" ng-repeat="chat in ac.chatlist track by $index">
+										<div class="message-right " ng-if="chat.from_id==agentemail">
+											<span class="rightbubble">{{chat.msg}}</span>
+											</div>
+										<div class="message-left " ng-if="chat.from_id!=agentemail">
+											<span class="leftbubble"> {{chat.msg}}</span>
+											 </div>
+									</div>
 								</div>
 								<div class="row" ng-if="!ac.disconnected">
-									<div class="col-md-9">
+									<div class="col-md-7">
 										<input id="private-message-{{$index}}" ng-model="inputs[ac.user1]" placeholder="Enter Message" class="form-control bor-gray pvtmsg"
 										/>
 									</div>
 									<div class="col-md-1">
 										<button class="btn btn-primary agentsendbtn " ng-enter="sendmsg(ac.user1,ac.username1,ac.user2,ac.username2,inputs[ac.user1]);"
-										  ng-click="sendmsg(ac.user1,ac.username1,ac.user2,ac.username2,inputs[ac.user1]);" id="private-button-{{$index}}">
+										    ng-click="sendmsg(ac.user1,ac.username1,ac.user2,ac.username2,inputs[ac.user1]);" id="private-button-{{$index}}">
 											<i class="fa fa-paper-plane" aria-hidden="true"></i>
 										</button>
 									</div>
 									<div class="col-md-2">
 										<button type="button" class="btn btn-primary btn-md enduserchat" ng-click="endchat(ac.user1,ac.username1,ac.user2,ac.username2);"
-										  id="endchat">End chat</button>
+										    id="endchat">End chat</button>
 									</div>
+									<div class="col-md-2">
+											<button type="button" class="btn btn-primary btn-md enduserchat" ng-click="endchat(ac.user1,ac.username1,ac.user2,ac.username2);"
+												id="endchat">transfer </button>
+										</div>
 								</div>
 							</div>
 						</div>
@@ -127,7 +140,7 @@
 						<label class="col-sm-3" for="email">Select Agent:</label>
 						<div class="col-sm-6">
 							<select class="form-control" data-ng-options="liveuser.name for liveuser in liveuserlist" data-ng-model="data.selectedOption"
-							  placeholder="select Agent">
+							    placeholder="select Agent">
 								<option disabled selected>Live Agent</option>
 								<!-- <option  data-ng-repeat="liveuser in liveuserlist" >{{liveuser.name}}</option> -->
 							</select>

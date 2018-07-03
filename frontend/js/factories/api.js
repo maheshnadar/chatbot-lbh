@@ -1,7 +1,7 @@
 myApp.factory('apiService', function ($http, $q, $timeout, $httpParamSerializer, $httpParamSerializerJQLike) {
     adminurl2 = "https://cingulariti.com:8094/lbhbackend/";
     var adminurl3 = "http://localhost:8080/api/";
-    var adminurl3 = "https://cingulariti.com:8095/api/";
+    var adminurl3 = "https://cingulariti.com:8089/api/";
     //adminurl2 = "http://localhost:8000/";
     //adminurl2 = "http://192.168.0.129:8000/";
     return {

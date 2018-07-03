@@ -4283,6 +4283,7 @@ $scope.formData = { customer_name:$.jStorage.get("name"),customer_id:$.jStorage.
             });
         };
         $scope.sendmsg = function (user1, username1, user2, username2, msg) {
+            console.log("inside send msg");
             apiService.sendmsg({
                 email: $scope.agentemail,
                 name: $scope.agentname,
@@ -4292,7 +4293,7 @@ $scope.formData = { customer_name:$.jStorage.get("name"),customer_id:$.jStorage.
 				toname:username1,
                 msg: msg
             }).then(function (data) {
-
+                $scope.inputs[user1]="";
             });
         };
         angular.element(document).ready(function () {
@@ -4302,6 +4303,7 @@ $scope.formData = { customer_name:$.jStorage.get("name"),customer_id:$.jStorage.
                 apiService.getchats({
                     email: $scope.agentemail
                 }).then(function (data) {
+                  
 					if(data.data.data) {
 						$scope.allchats = data.data.data;
 						for (i = 0; i <= data.data.data.length - 1; i++) {
@@ -4309,7 +4311,8 @@ $scope.formData = { customer_name:$.jStorage.get("name"),customer_id:$.jStorage.
 								//$scope.allchats = cdata;
 								//$scope.$apply();
 							});
-						}
+                        }
+                        console.log("get chat",$scope.allchats);
 					}
 					else
 						$scope.allchats = [];

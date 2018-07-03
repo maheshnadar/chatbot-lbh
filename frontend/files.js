@@ -51,11 +51,11 @@ module.exports = [
   'frontend/js/factories/api.js',
 
   // Contorllers
-  'frontend/js/private_message.js',
-  'frontend/js/public_message.js',
-  'frontend/js/room.js',
-  'frontend/js/user.js',
-  'frontend/js/util.js',
+  // 'frontend/js/private_message.js',
+  // 'frontend/js/public_message.js',
+  // 'frontend/js/room.js',
+  // 'frontend/js/user.js',
+  // 'frontend/js/util.js',
   'frontend/js/controllers/controller.js',
   'frontend/js/controllers/header-controller.js',
   'frontend/js/controllers/hotkeys-controller.js',
