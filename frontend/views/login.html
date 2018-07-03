@@ -1,0 +1,36 @@
+<div class="loginbg" ng-style="{height: iframeHeight + 'px'}">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-4 col-xs-12">
+				<div class="login">
+					<div class="login-container">
+						<h1 class="text-center">Login to Chat</h1><br>
+					  <form id="login_form" name="login_form">
+					  	<div class="form-group">
+								<!-- ng-pattern="/^[a-zA-Z0-9]*$/" -->
+							<input class="form-control username" id="username" type="email" name="username" placeholder="Username" ng-model="user.name" required >
+							<div class="pull-right" ng-repeat="(field,value) in login_form.username.$error" ng-show="login_form.username.$touched">
+								<span class="label label-danger" ng-if="field=='email' && value">Please Enter Valid Email</span>
+							</div>
+							<input class="form-control userpassword" type="password" name="userpassword" id="userpassword" placeholder="Password" ng-model="user.password" required>
+							<div class="pull-right" ng-repeat="(field,value) in login_form.userpassword.$error" ng-show="login_form.userpassword.$touched">
+								<span class="label label-danger" ng-if="field=='required' && value">Please Enter Password</span>
+							</div>
+							<div class="pull-right"  ng-if="loginerror==-1">
+								<span class="label label-danger">Please Enter Valid username/Password</span>
+							</div>
+							<div class="pull-right"  ng-if="notLoggedin">
+								<span class="label label-danger">Please Login To Continue</span>
+							</div>
+							<input class="form-control" id='login' type="submit" name="login" ng-disabled="login_form.$invalid"  class="btn btn-primary btn-lg btn-block" value="Login" ng-click="login(user.name,user.password);">
+						</div>
+					  </form>
+					  <!-- <div class="login-help">
+						<a href="#" class="text-center" ng-click="openForgotpassword();">Forgot Password</a>
+					  </div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

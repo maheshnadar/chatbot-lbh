@@ -1,0 +1,150 @@
+<div id="main">
+	<div style="display:none;">
+		<div>
+			My name:
+			<input type="text" id="my-name">
+			<button id="update-name">Update</button>
+		</div>
+		<h1>Users online</h1>
+		<div>
+			<select id="users-list" size="5"></select>
+			<button id="private-msg-button">Send private message to selected user</button>
+			<!-- <div id="convos"></div> -->
+		</div>
+		<h1>Chat rooms</h1>
+		<div>
+			<select id="rooms-list" size="5"></select>
+			<button id="join-room">Join selected room</button>
+			<button id="new-room">Start a new room</button>
+			<div id="rooms"></div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-3">
+				<div id="convos" class="" ng-style="{'height':agentpanelheight+ 'px'}">
+					<div class="agentusersidebar row">
+						<div class="userlist">
+							<!-- <button class="btn useronline" disabled>
+								<span class="userimg">
+									<img src="img/logo7.png" class="img-fluid">
+								</span>
+								Me
+								<span class="pull-right onlinesymbol">
+									<i class="fa fa-circle" aria-hidden="true"></i>
+								</span>
+							</button> -->
+							<h5 class="text-center online-user">
+								<b>CONNECTED USERS</b>
+							</h5>
+						</div>
+						<div class="userlist" ng-repeat="ac in allchats track by $index">
+
+							<button class="blink-bg blink_me blinkbtn{{ac.username1}}" data-toggle="tab" data-target="#collapseExample{{$index}}" aria-expanded="false"
+							  aria-controls="collapseExample{{$index}}">
+
+							</button>
+							<button type="button" class="btn useronline show-blink" data-toggle="tab" data-target="#collapseExample{{ac.user1}}" aria-expanded="false"
+							  aria-controls="collapseExample{{$index}}">
+								<span class="user-right closechat" id="private-username-{{ac.user1}}">
+									<span class="userimg">
+										<img src="img/logo7.png" class="img-fluid">
+									</span>
+									{{ac.username1}}
+								</span>
+								<span class="pull-right onlinesymbol addgreen{{ac.user1}}" data-toggle="tab" data-target="#collapseExample{{$index}}" aria-expanded="false"
+								  aria-controls="collapseExample{{$index}}">
+									<i class="fa fa-circle" aria-hidden="true"></i>
+								</span>
+								<i class="fa fa-times closechatt" aria-hidden="true" id="chatclose" id="private-username-{{$index}}" id="collapseExample-{{$index}}"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<h5 class="online-user">
+					<b>CHAT WINDOW</b>
+				</h5>
+				<!-- <div class="agent-list" ng-if="liveuserlist">
+						<select><option disabled selected>Transfer chat</option>
+							<option  data-ng-repeat="liveuser in liveuserlist">{{liveuser.name}}</option>
+						 </select> 
+							</div> -->
+				<div class="tab-content custom-fade">
+					<div id="convos_chat" class="chat-bg">
+						<div class="" ng-repeat="ac in allchats track by $index">
+							<div class="tab-pane fade " id="collapseExample{{$index}}">
+								<div id="private-messages-{{$index}}" ng-style="{'height':agentchatpanelheight}" class="private_conv">
+
+								</div>
+								<div class="row" ng-if="!ac.disconnected">
+									<div class="col-md-9">
+										<input id="private-message-{{$index}}" ng-model="inputs[ac.user1]" placeholder="Enter Message" class="form-control bor-gray pvtmsg"
+										/>
+									</div>
+									<div class="col-md-1">
+										<button class="btn btn-primary agentsendbtn " ng-enter="sendmsg(ac.user1,ac.username1,ac.user2,ac.username2,inputs[ac.user1]);"
+										  ng-click="sendmsg(ac.user1,ac.username1,ac.user2,ac.username2,inputs[ac.user1]);" id="private-button-{{$index}}">
+											<i class="fa fa-paper-plane" aria-hidden="true"></i>
+										</button>
+									</div>
+									<div class="col-md-2">
+										<button type="button" class="btn btn-primary btn-md enduserchat" ng-click="endchat(ac.user1,ac.username1,ac.user2,ac.username2);"
+										  id="endchat">End chat</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="disconnect" style="display:none">Waiting for reconnect...</div>
+
+<!-- trasfer chat agent modal -->
+
+<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Live Agent List</h4>
+			</div>
+			<div class="modal-body">
+				<!-- <div class="agent-list" ng-if="liveuserlist">
+				<select   data-ng-options="liveuser.name for liveuser in liveuserlist" data-ng-model="selectedOption" placeholder="select Agent">
+					<option disabled selected>Live Agent</option>
+					<option  data-ng-repeat="liveuser in liveuserlist" >{{liveuser.name}}</option>
+				 </select> 
+				</div> -->
+				<form class="form-horizontal" name="formName">
+					<div class="form-group">
+						<label class="col-sm-3" for="email">Select Agent:</label>
+						<div class="col-sm-6">
+							<select class="form-control" data-ng-options="liveuser.name for liveuser in liveuserlist" data-ng-model="data.selectedOption"
+							  placeholder="select Agent">
+								<option disabled selected>Live Agent</option>
+								<!-- <option  data-ng-repeat="liveuser in liveuserlist" >{{liveuser.name}}</option> -->
+							</select>
+						</div>
+
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12 ">
+							<button type="button " class="btn btn-primary pull-right" ng-click="tarsferuserchat(data);">Send</button>
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<!-- <div class="modal-footer">
+	 
+		</div> -->
+		</div>
+	</div>
+</div>

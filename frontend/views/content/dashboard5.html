@@ -1,0 +1,311 @@
+<script type="text/ng-template" id="collapseTree">
+    <div class="uibcollapseheader uch{{$index}}" type="button" class="btn btn-default"  data-index="{{$index}}" >
+        {{nest.key}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !isCollapsed, 'glyphicon-chevron-right': isCollapsed}"></i>
+    </div>
+    <div class="uibcollapsecontent collapse ucc{{$index}}" style="display:none;">
+        <div class="well well-lg">
+            <ng-bind-html ng-bind-html="trustedHtml(nest.value);"> 
+                {{nest.value}}
+            </ng-bind-html> 
+            <div ng-if="nest.collapse">
+                <div class="uibcollapsemain ucm{{$index}}" ng-repeat="nest in nest.collapse track by $index" data-index="{{$index}}" ng-include="'collapseTree'">
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</script>
+<script type="text/ng-template" id="categoryTree">
+    
+    <!-- <ul ng-if="processtext">
+        <li ng-repeat="category in category.categories" ng-include="'categoryTree'">           
+        </li>
+    </ul> -->
+    <p ng-if="processtext.key ==='' && processtext.value">
+        <ng-bind-html ng-bind-html="trustedHtml(processtext.value);" ng-if="processtext.key === ''">
+            {{processtext.value}}
+        </ng-bind-html>
+        <span id = "tooltip12" class="glyphicon glyphicon-plus-sign" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].Steps[$index] !== '' && tabvalue.element_values[0].Steps[$index]" ng-show="!!tabvalue.element_values[0].Steps.length && tabvalue.element_values[0].Steps[$index]" uib-tooltip="{{tabvalue.element_values[0].Steps[$index]}}"></span>
+        <span id = "tooltip12" class="glyphicon glyphicon-info-sign" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].Tooltip[$index] !== '' && tabvalue.element_values[0].Tooltip[$index]" ng-show="!!tabvalue.element_values[0].Tooltip.length && tabvalue.element_values[0].Tooltip[$index]" uib-tooltip="{{tabvalue.element_values[0].Tooltip[$index]}}"></span>
+        <span id = "tooltip12" class="glyphicon glyphicon-blackboard" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].System[$index] !== '' && tabvalue.element_values[0].System[$index]" ng-show="!!tabvalue.element_values[0].System.length && tabvalue.element_values[0].System[$index]" uib-tooltip="{{tabvalue.element_values[0].System[$index]}}"></span>
+        <span id = "tooltip12" class="glyphicon glyphicon-copyright-mark" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].Checks[$index] !== '' && tabvalue.element_values[0].Checks[$index]" ng-show="!!tabvalue.element_values[0].Checks.length && tabvalue.element_values[0].Checks[$index]" uib-tooltip="{{tabvalue.element_values[0].Checks[$index]}}"></span>
+    </p>
+    <p ng-if="!processtext.key && !processtext.value && !checkarray(processtext)">
+        <ng-bind-html ng-bind-html="trustedHtml(processtext);" ng-if="processtext !== ''">
+            {{processtext}}
+        </ng-bind-html>
+        <span id = "tooltip12" class="glyphicon glyphicon-plus-sign" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].Steps[$index] !== '' && tabvalue.element_values[0].Steps[$index]" ng-show="!!tabvalue.element_values[0].Steps.length && tabvalue.element_values[0].Steps[$index]" uib-tooltip="{{tabvalue.element_values[0].Steps[$index]}}"></span>
+        <span id = "tooltip12" class="glyphicon glyphicon-info-sign" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].Tooltip[$index] !== '' && tabvalue.element_values[0].Tooltip[$index]" ng-show="!!tabvalue.element_values[0].Tooltip.length && tabvalue.element_values[0].Tooltip[$index]" uib-tooltip="{{tabvalue.element_values[0].Tooltip[$index]}}"></span>
+        <span id = "tooltip12" class="glyphicon glyphicon-blackboard" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].System[$index] !== '' && tabvalue.element_values[0].System[$index]" ng-show="!!tabvalue.element_values[0].System.length && tabvalue.element_values[0].System[$index]" uib-tooltip="{{tabvalue.element_values[0].System[$index]}}"></span>
+        <span id = "tooltip12" class="glyphicon glyphicon-copyright-mark" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].Checks[$index] !== '' && tabvalue.element_values[0].Checks[$index]" ng-show="!!tabvalue.element_values[0].Checks.length && tabvalue.element_values[0].Checks[$index]" uib-tooltip="{{tabvalue.element_values[0].Checks[$index]}}"></span>
+    </p>
+    
+    <div ng-if="processtext.key">
+        <!-- <br> -->
+        <div class="nestedprocess" close-others="true">
+            <div  class="panel-default accord_heading"   data-index="{{0}}"    is-open="status.open">
+                <div class="uibcollapseheader2 nesteduibheading" ng-class="{'evenheader':$even}">
+                    <div >
+                        <i class=" glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i> <span>{{processtext.key}} </span>
+                    </div>
+                </div>
+                <div class="uibcollapsecontent2 collapse" style="display:none;">
+                    <p class="" >
+                            <ng-bind-html ng-bind-html="trustedHtml(processtext.value);"> 
+                            {{processtext.value}}
+                            </ng-bind-html> 
+                        
+                        <span id = "tooltip12" class="glyphicon glyphicon-plus-sign" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].Steps[$index] !== '' && tabvalue.element_values[0].Steps[$index]" ng-show="!!tabvalue.element_values[0].Steps.length && tabvalue.element_values[0].Steps[$index]" uib-tooltip="{{tabvalue.element_values[0].Steps[$index]}}"></span>
+                        <span id = "tooltip12" class="glyphicon glyphicon-info-sign" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].Tooltip[$index] !== '' && tabvalue.element_values[0].Tooltip[$index]" ng-show="!!tabvalue.element_values[0].Tooltip.length && tabvalue.element_values[0].Tooltip[$index]" uib-tooltip="{{tabvalue.element_values[0].Tooltip[$index]}}"></span>
+                        <span id = "tooltip12" class="glyphicon glyphicon-blackboard" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].System[$index] !== '' && tabvalue.element_values[0].System[$index]" ng-show="!!tabvalue.element_values[0].System.length && tabvalue.element_values[0].System[$index]" uib-tooltip="{{tabvalue.element_values[0].System[$index]}}"></span>
+                        <span id = "tooltip12" class="glyphicon glyphicon-copyright-mark" href="#" tooltip-placement="right" ng-if="tabvalue.element_values[0].Checks[$index] !== '' && tabvalue.element_values[0].Checks[$index]" ng-show="!!tabvalue.element_values[0].Checks.length && tabvalue.element_values[0].Checks[$index]" uib-tooltip="{{tabvalue.element_values[0].Checks[$index]}}"></span>
+                        <div ng-if="processtext.collapse">
+                            
+                            <div class="uibcollapsemain ucm{{$index}}" ng-repeat="nest in processtext.collapse track by $index" ng-include="'collapseTree'" data-index="{{$index}}">
+                                <!-- <div class="uibcollapseheader" type="button" class="btn btn-default"   >
+                                    {{nest.key}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !isCollapsed, 'glyphicon-chevron-right': isCollapsed}"></i>
+                                </div>
+                                <div class="uibcollapsecontent collapse" style="display:none;">
+                                    <div class="well well-lg">
+                                        <ng-bind-html ng-bind-html="trustedHtml(nest.value);"> 
+                                            {{nest.value}}
+                                        </ng-bind-html> 
+                                    </div>
+                                </div> -->
+                            </div> 
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div ng-if="checkarray(processtext)" class="">
+        <div ng-repeat="processtext in processtext" ng-include="'categoryTree'">
+            
+        </div>
+    </div> 
+</script>
+<div class="container-fluid tickermsgbar">
+    <div class="row">
+     <marquee direction="left" speed="normal" behavior="loop"  class="news_text yellowbg">
+        <span ng-repeat="ts in tickers">
+            {{ts.Title}}.
+            <span ng-if="ts.TickerType=='Link'">
+                <a ng-href="{{ts.LinkURL}}" target="_blank">Click Here</a>
+            </span>
+        </span>
+    </marquee>  
+    </div>
+</div>
+<div class="col-lg-8 expandable2">
+    
+    
+<div class="col-lg-12 fspanel" style="display:none;">    
+    <div class="row">
+        <div  class="col-md-12 oscr">
+            <uib-tabset active="active" id="tab_data2" ng-init="indextab = 1" ng-show="fstabs.length>0" ng-style="{height: tabHeight + 'px'}">
+                <uib-tab index="$index"  class="collapseheading {{row}}"     ng-repeat="row in fstabs track by $index"  ng-init="$tIndex2=$index" indval="{{$tIndex2}}"  >
+                    <!-- heading="{{row}}" -->
+                    <uib-tab-heading>
+                        {{row}}
+                    </uib-tab-heading>
+                    
+                    <div class ="tab-con2"  ng-if="row ==='Diagram'" >
+                        <div id="diagram-example2">
+                            
+                        </div>
+                    </div>
+                </uib-tab>    
+            </uib-tabset>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12 dashboard dashboard fdashboard">
+    <div class="row">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="col-lg-4">
+                    <!-- <marquee direction="left" speed="normal" behavior="loop"  class="news_text yellowbg">Important Notice : Please update your personal details before 1st July 2017</marquee> -->
+                    
+                    <div class="row cards">
+                        <!-- <div class="col-lg-3 dashboardtiles">
+                            <div class="widgetcard card " >
+                                <div class="  card-header" data-background-color="kotakblue">
+                                    <div class="">
+                                        <h3 class="card-title"><i class=" icon-search"></i> Top 5 searches &nbsp; &nbsp; &nbsp; &nbsp;</h3>
+                                        
+                                    </div>
+                                </div>
+                                <div class="table_panel">
+                                    <table id="topsearchtable" class="table table-hover  personal-task">
+                                        <tbody>
+                                            <tr>
+                                                <td>IFSC code for branch</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Location of Branch</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Change in contact details</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- ng-click="isCollapsed_c = !isCollapsed_c" -->
+                        <!-- uib-collapse="isCollapsed_c" -->
+                        <div class="col-lg-12 dashboardtiles">
+                            <div class="widgetcard card " >
+                                <div class="card-header" data-background-color="kotakblue">
+                                    <div class="">
+                                        <h3 class="card-title"><i class="fa fa-cogs"></i> New Process 
+                                            
+                                            <!-- <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-right': isCollapsed_c, 'glyphicon-chevron-down': !isCollapsed_c}"></i> -->
+                                        </h3>
+                                        <div class="notify-row">
+                                            <i class="fa fa-bell-o"></i>
+                                            <span class="badge bg-warning">{{ noticount }}</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="exporttoexcl">
+                                        <button class="btn btn-primary btn-xs" ng-click="exportToExcel('#notificationtable')" type="button" >
+                                            <span class="glyphicon glyphicon-export"></span>Exoprt
+                                        </button>
+                                    </div> -->
+                                </div>
+                                <div class="table_panel" >
+                                    <table id="notificationtable" class="table table-hover  personal-task">
+                                        <tbody>
+                                            <tr ng-repeat="nt in notifications track by $index" data-id="{{notifications[$index]._id}}" data-index="{{$index}}">
+                                                <td ng-click="readnotiit(notifications[$index]._id);">{{nt.Title}}
+                                                    <span ng-if="nt.DocFile.length>0">
+                                                        <a ng-href="http://exponentiadata.co.in/kotakdm/uploads/{{nt.DocFile[0]}}" target="_blank">Click Here</a>
+                                                    </span>
+                                                    <span ng-if="nt.TickerType=='Link'">
+                                                        <a ng-href="{{nt.LinkURL}}" target="_blank">Click Here</a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <!-- <tr>
+                                                <td>Process to follow in-case of bad weather</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Queries related to new Rs.200 notes</td>
+                                            </tr> -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row cards">
+                        <div class="col-lg-12 dashboardtiles">
+                            <div class="widgetcard card " >
+                                <div class="card-header" data-background-color="kotakblue">
+                                    <div class="">
+                                        <h3 class="card-title"><i class="fa fa-envelope-o"></i> Message Centre &nbsp; &nbsp;  &nbsp; &nbsp;
+                                            
+                                            <!-- <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-right': isCollapsed_c1, 'glyphicon-chevron-down': !isCollapsed_c1}"></i> -->
+                                        </h3>
+                                        <div class="notify-row">
+                                            <i class="fa fa-bell-o"></i>
+                                            <span class="badge bg-warning">{{ postcount }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table_panel" >
+                                    <table id="posttable" class="table table-hover  personal-task">
+                                        <tbody>
+                                            <!-- <tr>
+                                                <td>Dummy text</td>
+                                            </tr> -->
+                                             <tr ng-repeat="nt in postit track by $index" data-id="{{postit[$index]._id}}" data-index="{{$index}}">
+                                                <td ng-click="readpostit(postit[$index]._id);">
+                                                    {{nt.Title}}
+                                                    <span ng-if="nt.DocFile.length>0">
+                                                        <a ng-href="http://exponentiadata.co.in/kotakdm/uploads/{{nt.DocFile[0]}}" target="_blank">Click Here</a>
+                                                    </span>
+                                                    <span ng-if="nt.TickerType=='Link'">
+                                                        <a ng-href="{{nt.LinkURL}}" target="_blank">Click Here</a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row cards">
+                        <div class="col-lg-12 dashboardtiles">
+                            <div class="widgetcard card " >
+                                <div class="card-header" data-background-color="kotakblue">
+                                    <div class="">
+                                        <h3 class="card-title"><i class="icon-book"></i> Unanswered Queries
+                                            
+                        
+                                        </h3>
+                                        <div class="notify-row">
+                                            <i class="fa fa-bell-o"></i>
+                                            <span class="badge bg-warning">{{unansqueries.length + feedbackq.length - readunanscount - readfeedcount}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table_panel" >
+                                    <table id="unanstable" class="table table-hover  personal-task">
+                                        <tbody>
+                                            <tr  ng-repeat="unansq in unansqueries track by $index" data-index="{{$index}}" ng-if="unansqueries[$index].old_question !=''">
+                                                <td>
+                                                    <div class="faqques">
+                                                        <p class="lastmsg" >
+                                                            <a href="#"  ng-class="{'answered':unansq.handle==1,'unanswered':unansq.handle==0}" ng-click="getunansq(unansq.new_question,1,$index,unansq.old_question,unansq.mainquery,unansq._id,unansq.conversationid,0,unansq.interaction_index,$event);">
+                                                                <span >{{unansq.old_question}}</span>  <span class="glyphicon glyphicon-ok-sign" ng-if="unansq.handle==1"></span>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr  ng-repeat="unansq in feedbackq track by $index" data-index="{{$index}}" ng-if="feedbackq[$index].old_question !=''">
+                                                <td>
+                                                    <div class="faqques">
+                                                        <p class="lastmsg" >
+                                                            <a href="#"  ng-class="{'answered':unansq.handle==1,'unanswered':unansq.handle==0}" ng-click="getunansq(unansq.new_question,2,$index,unansq.old_question,unansq.mainquery,unansq._id,unansq.conversationid,unansq.dthyperlink,unansq.interaction_index,$event);">
+                                                                <span >{{unansq.mainquery}}</span>  <span class="glyphicon glyphicon-ok-sign" ng-if="unansq.handle==1"></span>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>     
+                    </div> -->
+                </div>
+                <div class="col-md-8">
+                    <div class='carousel slide' id='myCarouseimages' ng-if="images.length>0">
+                        <div class='carousel-inner'>
+                            <div class='item ' ng-class="{active:!$index}" ng-repeat="imglist in images track by $index" >
+                                <div class="col-xs-12" >
+                                    <div class=" myCarouseimages">
+                                        <a ng-href="http://exponentiadata.co.in/kotakdm/uploads/{{imglist.DocFile[0]}}"  data-fancybox="group" rel="gallary" fancybox >
+                                            <img ng-src="http://exponentiadata.co.in/kotakdm/uploads/{{imglist.DocFile[0]}}" class="img-full">
+                                            
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class='left carousel-control' href='#myCarouseimages' data-slide='prev'><i class='glyphicon glyphicon-chevron-left'></i></a>
+                        <a class='right carousel-control' href='#myCarouseimages' data-slide='next'><i class='glyphicon glyphicon-chevron-right'></i></a>
+                    </div>
+                </div>
+             </section>
+        </div>                        
+    </div>
+</div>

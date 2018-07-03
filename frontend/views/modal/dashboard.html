@@ -1,0 +1,143 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">My dashboard</h3>
+    <button type="button" class="close" aria-hidden="true" ng-click="Mydashboardcancel();">&times;</button>
+</div>
+<div class="modal-body profilemodal" id="modal-body">
+
+    <form class="form-horizontal">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group" >
+                    <label for="fromdate" class="col-sm-2 control-label"> Date Filter</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control fromdate bor-radi" name="fromdate" id="fromdate" placeholder="">
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="datefilter2" class="col-sm-2 control-label">Date Filter</label>
+                    <div class="col-sm-10">
+                        <select class="datefilter2 form-control" name="datefilter2" id="datefilter2">
+                            <option value="">Select Filter</option>
+                            <option value="1" selected>Today</option>
+                            <option value="2">Last 30 days</option>
+                        </select>
+                    </div>
+                </div> -->
+             
+            </div>
+         
+            <!-- <div class="col-md-6">
+                <div class="form-group" style="display:none;">
+                    <label for="todate" class="col-sm-2 control-label">To Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control todate" name="todate" id="todate" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="userlist" class="col-sm-2 control-label">Users</label>
+                    <div class="col-sm-10">
+                        <select class="userlist form-control" name="userlist" id="userlist">
+                            <option value="">My Team</option>
+                            <option value="{{myemail}}">Me</option>
+                        </select>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </form>
+    <div class="row finaldashboard dashboard ">
+        <div class="">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header" data-background-color="red">
+                        <!-- <i class="icon-bar-chart"></i> -->
+                        <i class="glyphicon glyphicon-comment"></i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category">Total Conversations</p>
+                        <h3 class="title ccount"></h3>
+                    </div>
+
+                    <!-- <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">local_offer</i> Tracked from Github
+                    </div>
+                </div> -->
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+
+                <div class="card card-stats">
+                    <div class="card-header" data-background-color="orange">
+                        <!-- <i class="icon-comments"></i> -->
+                        <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category">Total Interactions &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                        <h3 class="title icount">
+                            <small></small>
+                        </h3>
+                    </div>
+                    <!-- <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons text-danger">warning</i>
+                        <a href="#pablo">Get More Space...</a>
+                    </div>
+                </div> -->
+
+                </div>
+            </div>
+            <!-- <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="green">
+                   
+                    <i class="glyphicon glyphicon-edit"></i>
+                </div>
+                <div class="card-content">
+                    <p class="category">No. of topics discussed</p>
+                    <h3 class="title tcount"></h3>
+                </div>
+            
+            </div>
+        </div> -->
+
+            <!-- <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="blue">
+                    <i class="icon-dashboard"></i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Dummy Tile &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;</p>
+                    <h3 class="title">5</h3>
+                </div>
+            </div>
+        </div> -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+               <div class="text-center"><input type="text" class="name-search" ng-model="search.user1" placeholder="search"></div> 
+            <div class="text-overflow">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>No.</th>
+                        <th>Customer name</th>
+                        <th>Date and Start Time</th>
+                        <th>Date and End Time</th>
+                    </tr>
+                    <tr ng-repeat="userdata in userlist | filter : search" >
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{userdata.user1}}</td>
+                        <td>{{userdata.createdAt | date}} {{userdata.createdAt | date:"shortTime"}}</td>
+                        <td>{{userdata.updatedAt | date}} {{userdata.updatedAt | date:"shortTime"}}</td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer hidden">
+    <button class="btn btn-primary" type="button" ng-click="">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="">Cancel</button>

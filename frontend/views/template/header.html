@@ -1,0 +1,151 @@
+<!-- <header hide-on-scrol>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                <a class="navbar-brand" ui-sref="home"><img src="/img/logo.png" alt="logo" width="20"> </a>
+            </div>
+            <div class="collapse navbar-collapse" id="nav-collapse">
+                <div ng-include="template.menu" class="template menu"></div>
+            </div>
+        </div>
+    </nav>
+</header> 
+<div id="chatImage">
+    <img class="clickImage" src="img/Tenali.png" ng-click="showChatwindow();">
+</div>-->
+<div class="wrapper" ng-if="uipage!='home' && uipage!='login' && uipage!='forgotpassword' "> <!-- Wrapper Start-->
+    <header hide-on-scrol>
+    
+        <nav class="navbar navbar-default mainheader">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <!-- <button type="button" class="navbar-toggle collapsed"  ng-click="checkCollapsed();" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button> -->
+                     <!-- <button class="mini-submenu hidden-xs">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src="img/kotak_logo.png" class="img-responsive"></a> -->
+                    <ul class="nav navbar-nav navbar-left">
+                        <!-- <li ng-if="uipage=='agentdashboard'">
+                            
+                            <button id="nav-icon1" class="c-hamburger c-hamburger--rot mini-submenu hidden-xs ">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </li> -->
+                        <li>
+                            <a class="navbar-brand" href="#">
+                                <img src="img/rslogo.jpg" class="img-responsive"> 
+                            </a>
+                        </li>
+                    </ul>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right profilelist">
+                    <!-- <li ng-if="uipage == 'dashboard'" class="chatlink">
+                        <a ng-href="/" class=""><span class="glyphicon glyphicon-comment"></span> Chat</a>
+                    </li> -->
+                    <!-- <li >
+                        <div class="searchbar">
+                            <input type="text" class="searchTerm" ng-change="findTopic(topicSearch);" placeholder="I am looking for..." ng-model="topicSearch">
+                            <button type="submit" class="searchButton">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </li> -->
+					<!-- <li class="" ng-if="uipage!='agentdashboard'">
+                            
+						<a href="img/Kotak_Help.png" class="btn btn-primary headerbtns" ng-click="minimizeChatwindow();"  data-fancybox="imggroup" rel="gallary" fancybox  data-caption="Help"  >
+							<span >Help</span>
+						</a>
+					</li> -->
+
+                    <!-- <li ng-controller="CommonCtrl" class="datelist">
+                        <a href="#" class="cur_date">Date : {{FromDate}} 
+                            
+                        </a>
+                        
+                    </li> -->
+                    <!-- <li role="" class="" >
+                        <button id="" type="submit" class="btn btn-primary headerbtns" ng-click="showdashboard();">
+                            <span class="glyphicon glyphicon-home"></span> Home
+                        </button>
+                    </li> -->
+                    <!-- <li class="" ng-if="uipage=='dashboard'" >
+                        <a ng-href="/#!/agentdashboard" id=""  class="btn btn-primary btn-xs headerbtns" >
+                            <span class="glyphicon glyphicon-comment"></span> Live Chat
+                        </a>
+                    </li>
+                    <li class="" ng-if="uipage=='agentdashboard'" >
+                        <a ng-href="/#!/dashboard" id=""  class="btn btn-primary btn-xs headerbtns" >
+                            <span class="glyphicon glyphicon-dashboard"></span> Dashboard
+                        </a>
+                    </li> -->
+              
+                    <li  ng-if="uipage=='agentdashboard'" >
+                        <a   class="btn btn-primary btn-xs headerbtns" ng-click="openMydashboard()">
+                            <span class="glyphicon glyphicon-dashboard"></span> My Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a   class="btn btn-primary btn-xs headerbtns" ui-sref="hotkeys" target="_blank">
+                            <span class="glyphicon glyphicon-dashboard"></span> Hot Keys
+                        </a>
+                    </li>
+					<!-- <li ng-if="uipage=='agentdashboard'"><button id="logout" type="submit" class="btn btn-primary headerbtns"  ng-click="openMydashboard();">My Dashboard</button></li> -->
+                    <!-- <li class="profileDetail" ng-controller="LoginDetCtrl"><a><small>Name: </small><span >{{fullname}}</span></a></li>
+                    <li class="profileDetail" ng-controller="LoginDetCtrl"><a><small>Branch: </small><span >{{branch}} Branch</span></a></li> -->
+                    <!-- <li class="" ng-if="uipage != 'dashboard'"><a class="btn btn-primary btn-sm headerbtns" href="/dashboard"><i class="icon-dashboard"></i> &nbsp; Dashboard</a></li> -->
+                    <button class="btn btn-primary dropdown-toggle headerbtns" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Profile <span class="caret"></span> </button>
+                    <ul class="dropdown-menu pdm" aria-labelledby="dropdownMenu3">
+                        <!-- <li class="dropdown-header" ng-controller="LoginDetCtrl">
+                            <strong>Name: </strong><span >{{fullname}}</span><br>
+                            <strong>Branch: </strong><span >{{branch}} Branch</span>
+                        </li> -->
+                        
+						<li class="initial" ng-controller="LoginDetCtrl">
+                            
+                            <a ng-href="">
+                                <div class="nameinitial">{{fullname|limitTo:1}}</div>
+                                <span >{{fullname}}</span>
+                            </a>
+                        </li>
+                        <!-- <li role="separator" class="divider"></li> -->
+                        <!-- <li class="dropdown-header">LOCATION</li>
+                        <li class="" ng-controller="LoginDetCtrl">
+                           <a href="#"><span >{{branch}} Branch</span></a>
+                        </li>-->
+                        <li class="dropdown-header">ROLE</li>  
+                        <li class="" >
+                           <a ng-href=""><span >Live Chat</span></a>
+                        </li>
+                        <li class="" >
+                            <a id="changepwd" type="submit"  ng-controller="CommonCtrl" ng-click="openChangePwd();"><span >Change Password</span></a>
+                         </li>
+                        <li role="separator" class="divider"></li>
+                        <li role="" class="">
+                            <a ng-href="#" ng-controller="CommonCtrl" ng-click="alogout();">
+                                <span class="glyphicon glyphicon-off"></span> Logout
+                            </a>
+                        </li>
+               
+                    </ul>
+                    <!-- <li><button id="logout" type="submit" class="btn btn-primary headerbtns" ng-controller="CommonCtrl" ng-click="logout();">Log Out</button></li> -->
+                    <!-- <li><button id="changepwd" type="submit" class="btn btn-primary headerbtns" ng-controller="CommonCtrl" ng-click="openChangePwd();">Change Password</button></li> -->
+                    
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>                
+    </header>
